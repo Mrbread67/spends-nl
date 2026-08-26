@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Spends · money clarity, by just talking</title>
+<meta name="description" content="Say what you spent. Spends writes it down, files it, and shows what is left this month. Free to try, then €5 a month.">
+<link rel="canonical" href="https://spends.nl/">
+<meta name="theme-color" content="#100D0C">
+<meta property="og:title" content="Spends">
+<meta property="og:description" content="Money clarity, by just talking. Say what you spent, Spends files it and shows what is left.">
+<meta property="og:url" content="https://spends.nl/">
+<meta property="og:image" content="https://spends.nl/img/app-dashboard.jpg">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;700;800&display=swap">
+<link rel="preload" as="image" href="img/app-dashboard.jpg?v=2" fetchpriority="high">
+<link rel="stylesheet" href="main.css?v=32">
+</head>
+<body>
+
+<header class="top">
+  <a class="wordmark" href="/">spends<b>.</b></a>
+  <nav>
+    <a class="navlink" href="#voice">how it works</a>
+    <a class="navlink" href="#privacy">privacy</a>
+    <a class="pill" href="mailto:hello@spends.nl?subject=Spends%20waitlist">join the waitlist</a>
+  </nav>
+</header>
+
+<div class="scenes" id="scenes">
+  <div class="stage" aria-hidden="false">
+    <h1 class="sr">money clarity, by just talking.</h1>
+    <div class="herowords" aria-hidden="true">
+      <span class="hwrow r1"><span class="hl">money</span> <span class="hr">clarity,</span></span>
+      <span class="hwrow r2"><span class="hl">by just</span> <span class="hr">talking<span class="dot">.</span></span></span>
+    </div>
+    <div class="pair">
+    <div class="blob" aria-hidden="true"></div>
+    <div class="phone">
+      <span class="sb sb-action"></span><span class="sb sb-volup"></span><span class="sb sb-voldn"></span><span class="sb sb-power"></span>
+      <div class="bezel">
+        <div class="screens">
+          <div class="di" aria-hidden="true"></div>
+          <img class="s0 on" src="img/app-dashboard.jpg?v=2" width="920" height="2000" fetchpriority="high" decoding="async" alt="The Spends dashboard: what is left this month up top, and a bar per category below, growing as you spend.">
+          <img class="s1" src="img/app-voice.jpg?v=2" width="920" height="2000" decoding="async" alt="The voice screen listening while you say a spend out loud.">
+        </div>
+      </div>
+      <div class="mate" aria-hidden="true">
+        <span class="name">student house</span>
+        <div class="chips"><span>you</span><span>Marijke</span><span>Tom</span></div>
+        <span class="pnum num"><b>€</b> 2.304,81</span>
+        <span class="pbar" style="background:#C9EFD8;width:104px"></span>
+        <span class="pbar" style="background:#DDD5F6;width:76px"></span>
+        <span class="mcap">everyone sees the same numbers</span>
+      </div>
+      <div class="paytoast" aria-hidden="true">
+        <div class="ptc back">
+          <div class="row">
+            <span class="cl" style="background:#CFE6F8"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2E5A82" stroke-width="2" stroke-linecap="round"><path d="M6 9a6 6 0 0 1 0 6"></path><path d="M9.5 6.5a10 10 0 0 1 0 11"></path><path d="M13 4a14 14 0 0 1 0 16"></path></svg></span>
+            <span class="who">ZARA<br><small>paid with your phone</small></span>
+            <span class="amt num">−€ 14,00</span>
+          </div>
+          <div class="chip" style="background:#CFE6F8;color:#2E5A82">🛍️ Shopping</div>
+        </div>
+        <div class="ptc mid">
+          <div class="row">
+            <span class="cl" style="background:#FBEFC2"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7A6324" stroke-width="2" stroke-linecap="round"><path d="M6 9a6 6 0 0 1 0 6"></path><path d="M9.5 6.5a10 10 0 0 1 0 11"></path><path d="M13 4a14 14 0 0 1 0 16"></path></svg></span>
+            <span class="who">Cinema<br><small>paid with your phone</small></span>
+            <span class="amt num">−€ 24,95</span>
+          </div>
+          <div class="chip" style="background:#FBEFC2;color:#7A6324">🎟️ Fun</div>
+        </div>
+        <div class="ptc front">
+          <div class="row">
+            <span class="cl"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2E5A82" stroke-width="2" stroke-linecap="round"><path d="M6 9a6 6 0 0 1 0 6"></path><path d="M9.5 6.5a10 10 0 0 1 0 11"></path><path d="M13 4a14 14 0 0 1 0 16"></path></svg></span>
+            <span class="who">Albert Heijn<br><small>paid with your phone</small></span>
+            <span class="amt num">−€ 82,00</span>
+          </div>
+          <div class="chip">🥕 Groceries</div>
+        </div>
+      </div>
+    </div>
+    </div>
+
+    <a class="heropill" href="mailto:hello@spends.nl?subject=Spends%20waitlist">join the waitlist<span class="plus" aria-hidden="true">+</span></a>
+  </div>
+
+  <section class="panel hero" data-scene="0" id="home">
+    <div class="tag">
+      <p>say what you spent. spends files it and shows what is left.</p>
+    </div>
+    <div class="coming">
+      <div class="lines">
+        <span class="l1">coming to the App Store</span>
+        <span class="l2">join the waitlist today</span>
+      </div>
+      <a class="pill" href="mailto:hello@spends.nl?subject=Spends%20waitlist">join waitlist</a>
+    </div>
+  </section>
+
+  <section class="panel" data-scene="1" id="voice" style="--dot:#C9EFD8">
+    <div class="col">
+      <span class="kicker">voice</span>
+      <h2>just say it out loud.</h2>
+      <p class="sub">the way you would tell a friend. "i just had a big mac at mcdonald’s for nine fifty."</p>
+      <ul class="bullets">
+        <li>hold the mic and say it plainly</li>
+        <li>amount, place and category, heard in one go</li>
+        <li>recognition normally happens on your device</li>
+      </ul>
+      <div class="mobshot"><img src="img/app-voice.jpg?v=2" alt="" loading="lazy"></div>
+    </div>
+  </section>
+
+  <section class="panel" data-scene="2" id="applepay" style="--dot:#CFE6F8">
+    <div class="col">
+      <span class="kicker">paying with your phone</span>
+      <h2>you tap. it's already written down.</h2>
+      <p class="sub">spends notices a payment happened and files it under the right category. it reads the payment. it never touches the money.</p>
+      <ul class="bullets">
+        <li>no typing, no receipts, no end-of-day catch-up</li>
+        <li>filed by itself, ready to correct if it guessed wrong</li>
+        <li>set up once with a shortcut, in about two minutes</li>
+      </ul>
+      <div class="inlinecard paycard">
+        <span class="cardcap">paid with your phone, filed by itself</span>
+        <div class="prow">
+          <span class="cl"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2E5A82" stroke-width="2" stroke-linecap="round"><path d="M6 9a6 6 0 0 1 0 6"></path><path d="M9.5 6.5a10 10 0 0 1 0 11"></path><path d="M13 4a14 14 0 0 1 0 16"></path></svg></span>
+          <span class="pwho">Albert Heijn<span class="chip">🥕 Groceries</span></span>
+          <span class="amt num">−€ 82,00</span>
+        </div>
+        <div class="prow">
+          <span class="cl" style="background:#FBEFC2"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#7A6324" stroke-width="2" stroke-linecap="round"><path d="M6 9a6 6 0 0 1 0 6"></path><path d="M9.5 6.5a10 10 0 0 1 0 11"></path><path d="M13 4a14 14 0 0 1 0 16"></path></svg></span>
+          <span class="pwho">Cinema<span class="chip" style="background:#FBEFC2;color:#7A6324">🎟️ Fun</span></span>
+          <span class="amt num">−€ 24,95</span>
+        </div>
+        <div class="prow">
+          <span class="cl"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2E5A82" stroke-width="2" stroke-linecap="round"><path d="M6 9a6 6 0 0 1 0 6"></path><path d="M9.5 6.5a10 10 0 0 1 0 11"></path><path d="M13 4a14 14 0 0 1 0 16"></path></svg></span>
+          <span class="pwho">ZARA<span class="chip" style="background:#CFE6F8;color:#2E5A82">🛍️ Shopping</span></span>
+          <span class="amt num">−€ 14,00</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel" data-scene="3" id="sharing" style="--dot:#DDD5F6">
+    <div class="col">
+      <span class="kicker">sharing</span>
+      <h2>one budget, shared.</h2>
+      <p class="sub">share a budget with your partner, or with the whole house. everyone sees the same numbers.</p>
+      <ul class="bullets">
+        <li>one of you logs the groceries, everyone sees it</li>
+        <li>for couples, housemates and student houses alike</li>
+        <li>no end-of-month reckoning</li>
+      </ul>
+      <div class="inlinecard sharecard2">
+        <span class="name">student house</span>
+        <div class="chips"><span>you</span><span>Marijke</span><span>Tom</span></div>
+        <span class="pnum num"><b>€</b> 2.304,81</span>
+        <span class="pbar" style="background:#C9EFD8;width:104px"></span>
+        <span class="pbar" style="background:#DDD5F6;width:76px"></span>
+        <span class="mcap">everyone sees the same numbers</span>
+      </div>
+    </div>
+  </section>
+</div>
+
+<section class="flat" id="left">
+  <h2>what's left, and where it went.</h2>
+  <p class="sub">the big number is what you still have. the bars below it grow as you spend, one per category, so the tallest bar is usually all the explanation you need.</p>
+  <div class="bars" role="img" aria-label="Five bars showing where this month's money went: groceries 108 euro, subscriptions 35, fun 24, shopping 14, sweets 11.">
+    <div class="bar"><div class="fill" style="background:#DFF2B2;height:250px"><span>🥕</span></div><span class="amt num" style="color:#DFF2B2">€ 108</span></div>
+    <div class="bar"><div class="fill" style="background:#DDD5F6;height:120px"><span>📺</span></div><span class="amt num" style="color:#DDD5F6">€ 35</span></div>
+    <div class="bar"><div class="fill" style="background:#FBEFC2;height:100px"><span>🎟️</span></div><span class="amt num" style="color:#FBEFC2">€ 24</span></div>
+    <div class="bar"><div class="fill" style="background:#CFE6F8;height:75px"><span>🛍️</span></div><span class="amt num" style="color:#CFE6F8">€ 14</span></div>
+    <div class="bar"><div class="fill" style="background:#F6D2DA;height:66px"><span>🍦</span></div><span class="amt num" style="color:#F6D2DA">€ 11</span></div>
+  </div>
+  <p class="honest">the numbers above are a demo month. your own data never leaves your phone.</p>
+</section>
+
+<section class="flat privacy" id="privacy">
+  <h2>private, plainly.</h2>
+  <p>your budgets and transactions stay on your iPhone.</p>
+  <p>nothing is sent anywhere unless you choose to share a budget. no ads. no tracking. nothing sold on.</p>
+  <p><a href="privacy.html">read the privacy policy</a></p>
+</section>
+
+<section class="flat faq" id="faq">
+  <h2>fair questions.</h2>
+  <details open>
+    <summary>what does spends cost?</summary>
+    <div class="a">you start with a free trial, so spends can prove itself first. after that it is €5 a month, about one cinema snack. cancel whenever you like. no ads, nothing sold on.</div>
+  </details>
+  <details>
+    <summary>do i need an account?</summary>
+    <div class="a">no. spends works the moment you open it. only sharing a budget creates one, because sync needs somewhere to meet.</div>
+  </details>
+  <details>
+    <summary>what happens when i share a budget?</summary>
+    <div class="a">that budget is uploaded so you both see it. everything already in it comes along, not just new spends. the app tells you before it happens.</div>
+  </details>
+  <details>
+    <summary>does it work offline?</summary>
+    <div class="a">yes. everything lives on your iPhone. sharing needs a connection to sync, nothing else does.</div>
+  </details>
+  <details>
+    <summary>which languages does the voice understand?</summary>
+    <div class="a">english and dutch work best. recognition normally happens on your device.</div>
+  </details>
+  <details>
+    <summary>how do i delete my account?</summary>
+    <div class="a">settings, then delete account. it removes your data from the server. your budgets stay on your iPhone.</div>
+  </details>
+</section>
+
+<footer class="flat outro" id="waitlist">
+  <div class="bigword2">spends<span class="dot">.</span></div>
+  <p class="tagline">your month, still yours.</p>
+  <a class="pill" href="mailto:hello@spends.nl?subject=Spends%20waitlist">join the waitlist</a>
+  <p class="honest">free to try. no ads, no tracking. your data stays on your iPhone.</p>
+  <nav class="legal">
+    <a href="privacy.html">privacy</a>
+    <a href="terms.html">terms</a>
+    <a href="support.html">support</a>
+  </nav>
+  <p class="made">made by one person in the Netherlands</p>
+  <div class="skyline" aria-hidden="true">
+    <div style="background:#CFE6F8;height:150px"></div>
+    <div style="background:#FFD7C2;height:118px"></div>
+    <div style="background:#FBEFC2;height:104px"></div>
+    <div style="background:#DDD5F6;height:56px"></div>
+    <div style="background:#C9EFD8;height:53px"></div>
+    <div style="background:#F6D2DA;height:25px"></div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var wideQ = matchMedia('(min-width: 900px)');
+  var calm = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // The two modes are different layouts, not two states of one. Crossing the width
+  // where they swap rebuilds the page rather than leaving half of each behind.
+  wideQ.addEventListener('change', function(){ location.reload(); });
+  if (!wideQ.matches || calm) return;      // stacked mode: the page is already complete
+  var html = document.documentElement;
+  html.classList.add('cine');
+  html.setAttribute('data-scene', '0');
+  // The entrance belongs to an arriving visitor. A reload or a back-navigation part
+  // way down the page must not replay it against a scene that is already elsewhere.
+  // Armed straight away so the first frame is never the finished hero, then withdrawn
+  // one frame later if the browser turns out to have restored a scroll position deep in
+  // the page. At that point no animation has visibly progressed.
+  html.classList.add('intro');
+  requestAnimationFrame(function(){ if (scrollY >= 4) html.classList.remove('intro'); });
+
+  var screens = { 0: '.s0', 1: '.s1', 2: '.s0', 3: '.s0' };
+  var imgs = document.querySelectorAll('.phone img');
+  function show(n){
+    if (n !== 0) html.classList.remove('intro');
+    if (html.getAttribute('data-scene') === String(n)) return;
+    html.setAttribute('data-scene', String(n));
+    imgs.forEach(function(im){ im.classList.remove('on'); });
+    var im = document.querySelector('.phone ' + screens[n]);
+    if (im) im.classList.add('on');
+    setCycle(n === 2);
+  }
+
+  // Release the stage once the last panel has passed, so the footer scrolls
+  // over a parked stage instead of a fixed one.
+  var scenes = document.getElementById('scenes');
+  function release(){
+    var r = scenes.getBoundingClientRect();
+    scenes.classList.toggle('done', r.bottom <= innerHeight);
+  }
+  addEventListener('scroll', function(){ requestAnimationFrame(release); }, { passive: true });
+  addEventListener('resize', function(){ requestAnimationFrame(release); }, { passive: true });
+  release();
+
+  // The payment stack cycles while its scene is on stage, so every card gets
+  // its turn in front. Cleared the moment the scene changes.
+  var cycle = null;
+  function setCycle(on){
+    if (on && !cycle) {
+      cycle = setInterval(function(){
+        var f = document.querySelector('.ptc.front'),
+            m = document.querySelector('.ptc.mid'),
+            b = document.querySelector('.ptc.back');
+        if (!f || !m || !b) return;
+        f.classList.replace('front', 'back');
+        m.classList.replace('mid', 'front');
+        b.classList.replace('back', 'mid');
+      }, 2600);
+    } else if (!on && cycle) { clearInterval(cycle); cycle = null; }
+  }
+
+  // The scene belongs to whichever panel is crossing the middle of the screen. The
+  // zero-height band at the midline means exactly one panel can ever qualify, so a
+  // panel peeking in at the bottom cannot take the stage while you are still reading
+  // the one above it.
+  var panels = document.querySelectorAll('.panel');
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting) show(parseInt(e.target.getAttribute('data-scene'), 10));
+    });
+  }, { rootMargin: '-50% 0px -50% 0px', threshold: 0 });
+  panels.forEach(function(p){ io.observe(p); });
+
+  // The copy fades up on its own schedule, well before its panel owns the stage.
+  var reveal = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting) { e.target.classList.add('seen'); reveal.unobserve(e.target); }
+    });
+  }, { threshold: 0.3 });
+  panels.forEach(function(p){ reveal.observe(p); });
+
+  // Preview hooks: ?scene=N freezes one scene without scrolling, ?flat hides the
+  // scenes so the lower sections paint at the top. Harmless in production, and the
+  // only way to inspect scroll states in an environment that cannot scroll.
+  var q = location.search;
+  var m = q.match(/scene=(\d)/);
+  if (m) {
+    var n = parseInt(m[1], 10);
+    show(n);
+    panels.forEach(function(p){
+      if (parseInt(p.getAttribute('data-scene'), 10) === n) {
+        p.classList.add('seen'); p.style.position = 'fixed'; p.style.inset = '0'; p.style.zIndex = '5';
+      } else { p.style.display = 'none'; }
+    });
+    document.querySelectorAll('.flat').forEach(function(f){ f.style.display = 'none'; });
+  }
+  var f = q.match(/flat(?:=([a-z]+))?/);
+  if (f) {
+    document.getElementById('scenes').style.display = 'none';
+    if (f[1]) {
+      var hit = false;
+      document.querySelectorAll('.flat').forEach(function(sec){
+        if (sec.id === f[1]) hit = true;
+        if (!hit) sec.style.display = 'none';
+      });
+    }
+  }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+/* Legal pages, night theme to match the main site. */
+:root{
+  --bg:#100D0C; --card:#1B1613; --ink:#FFF8F4;
+  --ink2:rgba(255,248,244,.62); --ink3:rgba(255,248,244,.4);
+  --accent:#FF7F50; --accentSoft:#33211A; --line:rgba(255,248,244,.09); --maxw:44rem;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:16px/1.65 'Urbanist',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:2.5rem 1.25rem 4rem}
+header.site{display:flex;align-items:center;gap:.5rem;margin-bottom:2.5rem}
+header.site a{display:flex;align-items:center;gap:.15rem;text-decoration:none;color:var(--ink)}
+.logo{font-weight:800;font-size:1.35rem;letter-spacing:-.02em}
+.dot{color:var(--accent);font-weight:800;font-size:1.35rem}
+h1{font-size:2rem;line-height:1.2;letter-spacing:-.02em;margin:0 0 .5rem;font-weight:800}
+h2{font-size:1.15rem;letter-spacing:-.01em;margin:2.25rem 0 .6rem;font-weight:700}
+h3{font-size:1rem;margin:1.5rem 0 .4rem;color:var(--ink);font-weight:700}
+p,li{color:var(--ink2)}
+.lead{font-size:1.05rem;color:var(--ink2);margin:0 0 1.5rem}
+.updated{color:var(--ink3);font-size:.85rem;margin:0 0 2rem}
+a{color:var(--accent)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:1rem;padding:1.1rem 1.25rem;margin:1rem 0}
+.card p:last-child,.card ul:last-child{margin-bottom:0}
+.card p:first-child{margin-top:0}
+ul{padding-left:1.15rem}
+li{margin:.35rem 0}
+table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.93rem;display:block;overflow-x:auto}
+th,td{text-align:left;padding:.6rem .7rem;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--ink);font-weight:700;white-space:nowrap}
+td{color:var(--ink2)}
+.pill{display:inline-block;background:var(--accentSoft);color:var(--accent);
+  border-radius:999px;padding:.15rem .6rem;font-size:.78rem;font-weight:700;white-space:nowrap}
+.nav{display:flex;flex-wrap:wrap;gap:.5rem;margin:2rem 0 0}
+.nav a{display:block;background:var(--card);border:1px solid var(--line);border-radius:999px;
+  padding:.5rem 1rem;text-decoration:none;color:var(--ink);font-weight:600;font-size:.92rem}
+footer{margin-top:3.5rem;padding-top:1.5rem;border-top:1px solid var(--line);color:var(--ink3);font-size:.85rem}
+footer a{color:var(--ink3)}

@@ -1,0 +1,325 @@
+/* spends.nl · night stage */
+
+:root{
+  --bg:#100D0C; --panel:#1B1613;
+  --ink:#FFF8F4; --ink2:rgba(255,248,244,.6); --ink3:rgba(255,248,244,.4);
+  --coral:#FF7F50;
+  --peach:#FFD7C2; --mint:#C9EFD8; --lavender:#DDD5F6;
+  --sky:#CFE6F8; --lemon:#FBEFC2; --rose:#F6D2DA;
+  --ease:cubic-bezier(.32,.72,0,1);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:16px/1.6 'Urbanist',system-ui,sans-serif;-webkit-font-smoothing:antialiased;
+  overflow-x:hidden}
+a{color:var(--ink);text-decoration:none}
+.num{font-variant-numeric:tabular-nums}
+
+/* header */
+.top{position:fixed;inset:0 0 auto 0;z-index:50;display:flex;align-items:center;
+  justify-content:space-between;padding:18px 28px;
+  background:linear-gradient(to bottom,rgba(16,13,12,.85),rgba(16,13,12,0))}
+.wordmark{font-size:19px;font-weight:800;letter-spacing:-.01em}
+.wordmark b,.dot{color:var(--coral);font-weight:800}
+.top nav{display:flex;gap:22px;align-items:center}
+.top nav a{font-size:14px;font-weight:500;color:var(--ink2);transition:color .22s var(--ease)}
+.top nav a:hover{color:var(--ink)}
+.pill{display:inline-flex;align-items:center;background:var(--coral);color:#100D0C;
+  border-radius:999px;padding:10px 20px;font-size:13px;font-weight:700;
+  transition:transform .22s var(--ease),box-shadow .22s var(--ease)}
+.pill:hover{transform:translateY(-1px);box-shadow:0 10px 30px rgba(255,127,80,.35)}
+.pill:focus-visible,a:focus-visible,summary:focus-visible{outline:2px solid var(--coral);outline-offset:3px}
+
+/* the scenes wrapper + sticky stage */
+.scenes{position:relative}
+/* --pw drives everything on the stage: the phone, the blob that frames it, where
+   the headline tucks and where the pill sits. Deriving it from the viewport height
+   too means the phone always clears the header and the fold, at any window size. */
+.stage{--pw:min(340px,66vw,calc((100vh - 120px) / 2.174));
+  --ph:calc((var(--pw) - 24px) * 2.1739 + 24px);
+  --bm:45px;--bmx:152px;--tuck:10px;
+  position:relative;padding:110px 20px 40px;display:flex;flex-direction:column;
+  align-items:center;gap:26px;min-height:70vh;justify-content:center}
+/* the coral sits with the phone, not with the stage, so the two can never drift
+   apart. --bmx is the wide horizontal margin Maarten asked for, --bm the tighter
+   vertical one, which also sets the corner radius. */
+.pair{display:contents}
+.blob{position:absolute;left:50%;top:54%;
+  width:min(calc(var(--pw) + var(--bmx) * 2),92vw);height:calc(var(--ph) + var(--bm) * 2);
+  transform:translate(-50%,-50%);border-radius:calc(54px + var(--bm));
+  background:var(--coral);opacity:.92;
+  box-shadow:0 0 120px rgba(255,127,80,.3);
+  transition:background-color .7s var(--ease),transform .7s var(--ease)}
+/* the headline is scenery: split in two, running behind the phone */
+.herowords{position:absolute;left:0;right:0;top:0;height:100%;pointer-events:none;z-index:2;
+  transition:opacity .6s var(--ease)}
+.hwrow{position:absolute;left:0;right:0;font-weight:700;letter-spacing:-.03em;
+  line-height:1.05;font-size:clamp(30px,6.2vw,88px);color:#E3DCD6}
+.hl,.hr{position:absolute;white-space:nowrap}
+/* both halves tuck the same distance behind the frame, so the words sit
+   symmetrically around the phone and neither side loses a whole letter */
+.hl{right:calc(50% + var(--pw) / 2 - var(--tuck));text-align:right}
+.hr{left:calc(50% + var(--pw) / 2 - var(--tuck));text-align:left}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.phone{position:relative;width:var(--pw);border-radius:54px;
+  background:linear-gradient(145deg,#5a5a5e,#2b2b2e 30%,#1d1d20 55%,#525256 92%);
+  padding:3px;box-shadow:0 40px 100px rgba(0,0,0,.55);
+  transition:transform .7s var(--ease),opacity .5s var(--ease)}
+.phone .bezel{width:100%;border-radius:51px;background:#0A0807;padding:9px;box-sizing:border-box}
+/* the screen carries the screenshots' own 920x2000 ratio and the body derives from
+   it, so the whole dashboard is shown instead of cover shaving off both sides */
+.phone .screens{position:relative;width:100%;aspect-ratio:920/2000;
+  border-radius:42px;overflow:hidden;background:#FFF8F4}
+.sb{position:absolute;background:linear-gradient(90deg,#3c3c3f,#57575b);border-radius:3px;width:3.5px}
+.sb-action{left:-3px;top:17%;height:20px}
+.sb-volup{left:-3px;top:25%;height:36px}
+.sb-voldn{left:-3px;top:32.5%;height:36px}
+.sb-power{right:-3px;left:auto;top:27%;height:62px;background:linear-gradient(270deg,#3c3c3f,#57575b)}
+.phone img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top;
+  opacity:0;transition:opacity .55s var(--ease)}
+/* Drawn Dynamic Island: his real dashboard screenshot lacks one, the voice shot has
+   one. One overlay at the same spot covers both, so every screen carries it. */
+.di{position:absolute;top:1.7%;left:50%;transform:translateX(-50%);
+  width:30.87%;aspect-ratio:71/20;background:#000;border-radius:999px;z-index:4}
+.phone img.on{opacity:1}
+
+/* scene panels */
+.panel{position:relative;z-index:5;min-height:100vh;display:flex;align-items:center;padding:110px 6vw 60px}
+.panel .col{max-width:430px;display:flex;flex-direction:column;gap:16px}
+.kicker{font-size:12px;font-weight:700;letter-spacing:.12em;color:var(--ink3);text-transform:uppercase}
+.panel h2{margin:0;font-size:clamp(34px,4.4vw,54px);font-weight:700;letter-spacing:-.02em;line-height:1.08}
+.panel .sub{font-size:16px;font-weight:500;color:var(--ink2);line-height:1.6;margin:0}
+.bullets{list-style:none;margin:6px 0 0;padding:0;display:flex;flex-direction:column;gap:12px}
+.bullets li{display:flex;gap:11px;align-items:baseline;font-size:15px;font-weight:500;color:rgba(255,248,244,.78)}
+.bullets li::before{content:"";width:6px;height:6px;border-radius:999px;background:var(--dot,var(--coral));flex:none;transform:translateY(-2px)}
+.mobshot{display:none}
+
+/* hero panel */
+.hero{justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap}
+.hero .tag p{margin:8px 0 0;font-size:14px;font-weight:500;color:var(--ink2);max-width:34ch}
+.coming{display:flex;align-items:center;gap:14px;background:rgba(255,248,244,.06);
+  border-radius:16px;padding:14px 18px}
+.coming .lines{display:flex;flex-direction:column;gap:2px}
+.coming .l1{font-size:13px;font-weight:700}
+.coming .l2{font-size:12px;font-weight:500;color:var(--ink3)}
+.coming .pill{background:var(--ink);color:#100D0C;white-space:nowrap}
+
+/* flat sections after the scenes */
+.flat{position:relative;z-index:5;padding:120px 6vw;display:flex;flex-direction:column;
+  align-items:center;text-align:center;gap:16px;background:var(--bg)}
+.flat h2{margin:0;font-size:clamp(30px,3.6vw,46px);font-weight:700;letter-spacing:-.02em}
+.flat .sub{max-width:52ch;color:var(--ink2);font-weight:500;margin:0}
+.bars{display:flex;align-items:flex-end;gap:clamp(10px,2.4vw,26px);margin-top:26px}
+.bars .bar{display:flex;flex-direction:column;align-items:center;gap:10px}
+.bars .fill{width:clamp(38px,5.4vw,64px);border-radius:18px 18px 8px 8px;display:flex;
+  justify-content:center;padding-top:9px}
+.bars .fill span{font-size:clamp(13px,1.4vw,19px)}
+.bars .amt{font-size:13px;font-weight:700;white-space:nowrap}
+.honest{font-size:13px;color:var(--ink3);font-weight:500}
+
+/* privacy */
+.privacy p{margin:0;font-size:17px;font-weight:500;max-width:46ch;line-height:1.7}
+.privacy p+p{color:var(--ink2)}
+.privacy a{font-weight:700;text-decoration:underline;text-underline-offset:3px}
+
+/* faq */
+.faq{align-items:stretch;max-width:720px;margin:0 auto;text-align:left;width:100%}
+.faq h2{text-align:center;margin-bottom:10px}
+.faq details{background:var(--panel);border-radius:18px;padding:0;overflow:hidden}
+.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;
+  align-items:center;gap:16px;padding:18px 22px;font-size:16px;font-weight:700}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";content:"+" / "";font-size:20px;font-weight:500;color:var(--ink3);transition:transform .28s var(--ease)}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq .a{padding:0 22px 18px;font-size:15px;font-weight:500;color:var(--ink2);line-height:1.6}
+
+/* footer */
+.outro{padding:140px 6vw 0;position:relative;overflow:hidden}
+.outro .bigword2{font-weight:800;letter-spacing:-.04em;line-height:1;font-size:clamp(56px,13vw,190px);white-space:nowrap}
+.outro .tagline{font-size:clamp(16px,2vw,22px);font-weight:500;color:var(--ink2);margin:14px 0 26px}
+.outro .honest{margin-top:14px}
+.legal{display:flex;gap:26px;justify-content:center;margin:34px 0 0;flex-wrap:wrap}
+.legal a{font-size:13px;font-weight:700;color:var(--ink2)}
+.legal a:hover{color:var(--ink)}
+.made{font-size:13px;color:var(--ink3);font-weight:500;margin:16px 0 0;padding-bottom:150px}
+.skyline{position:absolute;left:0;right:0;bottom:0;display:flex;justify-content:center;
+  align-items:flex-end;gap:clamp(8px,2vw,16px);opacity:.5;pointer-events:none}
+.skyline div{width:clamp(34px,9vw,56px);border-radius:16px 16px 0 0}
+
+/* One phone plays every role. In the hero it stands full size and centred; scrolling
+   into the scenes it glides right and shrinks, one continuous move, no crossfade. */
+
+/* the waitlist pill floats over the lower half of the phone */
+.heropill{display:flex;align-items:center;gap:12px;padding:9px 9px 9px 22px;border-radius:999px;
+  background:rgba(16,13,12,.66);border:1px solid rgba(255,127,80,.45);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  font-size:14px;font-weight:700;width:fit-content;
+  transition:opacity .5s var(--ease),transform .5s var(--ease),box-shadow .22s var(--ease)}
+.heropill .plus{width:30px;height:30px;border-radius:999px;background:var(--coral);color:#100D0C;
+  display:grid;place-items:center;font-size:17px;font-weight:800}
+.heropill:hover{box-shadow:0 12px 34px rgba(255,127,80,.3)}
+.cine .heropill{position:absolute;left:50%;top:calc(54% + var(--ph) / 2 - 96px);
+  transform:translateX(-50%);z-index:4}
+.cine .heropill:hover{transform:translateX(-50%) translateY(-2px)}
+.cine:not([data-scene="0"]) .heropill{opacity:0;pointer-events:none;visibility:hidden;
+  transform:translateX(-50%) translateY(12px);
+  transition:opacity .5s var(--ease),transform .5s var(--ease),visibility 0s .5s}
+html:not(.cine) .heropill{position:relative;z-index:3;margin:-58px auto 0}
+
+/* stage props: the pay toast and the housemate card */
+.paytoast{position:absolute;right:76%;top:24%;width:258px;height:130px;
+  opacity:0;pointer-events:none;transform:translateY(12px);
+  transition:opacity .5s var(--ease) .25s,transform .5s var(--ease) .25s}
+.cine[data-scene="2"] .paytoast{opacity:1;transform:translateY(0)}
+.ptc{position:absolute;left:0;right:0;top:0;background:#FFF8F4;color:#1C1C1E;
+  border-radius:22px;box-shadow:0 24px 60px rgba(0,0,0,.5);padding:14px 16px;
+  display:flex;flex-direction:column;gap:10px;
+  transition:transform .55s var(--ease)}
+.ptc .chip{opacity:0;transform:translateY(4px);
+  transition:opacity .45s var(--ease),transform .45s var(--ease)}
+.ptc.front{transform:translateY(0) scale(1);z-index:3}
+.ptc.front .chip{opacity:1;transform:none}
+.ptc.mid{transform:translateY(-38px) scale(.97);z-index:2}
+.ptc.back{transform:translateY(-74px) scale(.94);z-index:1}
+.paytoast .row,.ptc .row{display:flex;align-items:center;gap:11px}
+.paytoast .cl,.ptc .cl,.inlinecard .cl{width:36px;height:36px;flex:none;border-radius:999px;background:#CFE6F8;
+  display:flex;align-items:center;justify-content:center}
+.paytoast .who,.ptc .who{font-size:14px;font-weight:700;line-height:1.25}
+.paytoast .who small,.ptc .who small{font-size:11px;font-weight:500;color:rgba(60,60,67,.55)}
+.paytoast .amt,.ptc .amt,.inlinecard .amt{margin-left:auto;font-size:14px;font-weight:700}
+.paytoast .chip,.ptc .chip,.inlinecard .chip{background:#C9EFD8;color:#2E6B4A;border-radius:999px;
+  padding:6px 12px;font-size:12px;font-weight:700;width:fit-content}
+.mate{position:absolute;right:76%;top:46%;transform:translateY(12px) rotate(-2deg);
+  opacity:0;pointer-events:none;background:#FFF8F4;color:#1C1C1E;border-radius:22px;
+  padding:16px 18px;width:190px;box-shadow:0 24px 60px rgba(0,0,0,.5);
+  display:flex;flex-direction:column;gap:8px;
+  transition:opacity .5s var(--ease) .25s,transform .5s var(--ease) .25s}
+.mate .name{font-size:12px;font-weight:700;color:rgba(60,60,67,.55)}
+.mate .pnum{font-size:22px;font-weight:800}
+.mate .pnum b{color:var(--coral);font-weight:800}
+.mate .pbar{height:9px;border-radius:999px;display:block}
+.mate .mcap,.sharecard2 .mcap{font-size:11px;font-weight:500;color:rgba(60,60,67,.55);margin-top:2px}
+.mate .chips,.sharecard2 .chips{display:flex;gap:6px;flex-wrap:wrap}
+.mate .chips span,.sharecard2 .chips span{background:#DDD5F6;color:#4A3F8A;border-radius:999px;
+  padding:3px 10px;font-size:11px;font-weight:700}
+.sharecard2 .name{font-size:12px;font-weight:700;color:rgba(60,60,67,.55)}
+.sharecard2 .pnum{font-size:22px;font-weight:800}
+.sharecard2 .pnum b{color:var(--coral);font-weight:800}
+.sharecard2 .pbar{height:9px;border-radius:999px;display:block}
+.cine[data-scene="3"] .mate{opacity:1;transform:translateY(0) rotate(-2deg)}
+
+/* stacked-mode payment card: one row per transaction, each with its own category */
+.paycard{gap:14px}
+.paycard .cardcap{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
+  color:rgba(60,60,67,.5)}
+.paycard .prow{display:flex;align-items:center;gap:11px}
+.paycard .prow+.prow{border-top:1px solid rgba(60,60,67,.09);padding-top:13px}
+.paycard .pwho{display:flex;flex-direction:column;align-items:flex-start;gap:5px;
+  font-size:14px;font-weight:700;line-height:1.2}
+.paycard .pwho .chip{display:inline-block;background:#C9EFD8;color:#2E6B4A;border-radius:999px;
+  padding:3px 10px;font-size:11px;font-weight:700}
+.paycard .amt{margin-left:auto;font-size:14px;font-weight:700;white-space:nowrap}
+
+/* the same cards, inline, for stacked mode */
+.inlinecard{display:none;background:#FFF8F4;color:#1C1C1E;border-radius:22px;
+  padding:16px 18px;margin-top:22px;box-shadow:0 24px 60px rgba(0,0,0,.5);
+  flex-direction:column;gap:10px;width:fit-content;min-width:250px}
+html:not(.cine) .inlinecard{display:flex}
+
+/* narrow desktop: keep the props off the text */
+@media (max-width:1180px){
+  .cine .panel .col{max-width:330px}
+  .cine .paytoast{display:none}
+  .cine .mate{display:none}
+}
+
+/* entrance, once, on load: the stage assembles */
+/* Each keyframe states only where it comes FROM. The implicit end is the element's
+   own resting style, so an animation can never hand over to a different value and
+   pop. Scoped to .intro, which JS sets only when the page really opens at the top. */
+@keyframes bloom{from{opacity:0;transform:translate(-50%,-50%) scale(.92)}}
+.cine.intro .blob{animation:bloom .9s var(--ease) backwards}
+@keyframes phonein{from{opacity:0;transform:translate(-50%,-44%)}}
+.cine.intro .phone{animation:phonein 1s .2s var(--ease) backwards}
+@keyframes hwl{from{opacity:0;transform:translateX(-34px)}}
+@keyframes hwr{from{opacity:0;transform:translateX(34px)}}
+.cine.intro .hl{animation:hwl .9s .3s var(--ease) backwards}
+.cine.intro .hr{animation:hwr .9s .3s var(--ease) backwards}
+@keyframes heroin{from{opacity:0;transform:translateX(-50%) translateY(16px)}}
+.cine.intro .heropill{animation:heroin .8s .65s var(--ease) backwards}
+
+/* ---------- cinema mode (wide screens, motion allowed) ---------- */
+.cine .scenes{height:auto;position:relative}
+.cine .stage{position:fixed;inset:0;height:100vh;min-height:0;padding:0;z-index:1}
+.cine .scenes.done .stage{position:absolute;top:auto;bottom:0}
+.cine{--shift:min(19.5vw,340px)}
+.cine .blob{position:absolute}
+.cine .hwrow.r1{top:calc(54% - 1.05em)}
+.cine .hwrow.r2{top:54%}
+.cine .phone{position:absolute;left:50%;top:54%;transform:translate(-50%,-50%);z-index:3}
+/* the panels are a scroll track laid over the stage, never a lid on it */
+.cine .panel{pointer-events:none}
+.cine .panel .col{pointer-events:auto}
+.cine .panel.hero{min-height:100vh;align-items:flex-end;padding-bottom:44px}
+.cine .panel:not(.hero){min-height:110vh}
+.cine .flat{position:relative;z-index:5}
+/* scene states */
+.cine:not([data-scene="0"]) .blob,.cine:not([data-scene="0"]) .phone{
+  transform:translate(calc(-50% + var(--shift)),-50%) scale(.84)}
+.cine[data-scene="1"] .blob{background-color:var(--mint)}
+.cine[data-scene="2"] .blob{background-color:var(--sky)}
+.cine[data-scene="3"] .blob{background-color:var(--lavender)}
+.cine:not([data-scene="0"]) .herowords{opacity:0}
+/* the copy holds its place while its panel owns the stage, instead of drifting up
+   into the header as the panel scrolls past */
+.cine .panel .col{position:sticky;top:34vh;
+  opacity:0;transform:translateY(34px);transition:opacity .55s var(--ease),transform .55s var(--ease)}
+.cine .panel.seen .col{opacity:1;transform:none}
+/* in cinema the stage words and pill carry the hero, so the panel copy stays out */
+.cine .panel.hero .tag,.cine .panel.hero .coming{display:none}
+
+/* ---------- stacked mode (mobile, reduced motion, no JS) ---------- */
+html:not(.cine) .top{padding:10px 16px;background:rgba(16,13,12,.82);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+html:not(.cine) .top .pill{padding:8px 15px;font-size:12px}
+html:not(.cine) .stage{--pw:min(272px,64vw);--bm:34px;--bmx:34px;
+  padding:96px 20px calc(var(--bm) + 26px);min-height:0}
+/* stacked: the pair becomes the blob's frame of reference, so the coral hugs the
+   phone instead of reaching up into the headline */
+html:not(.cine) .pair{display:block;position:relative;z-index:1}
+html:not(.cine) .blob{position:absolute;z-index:0;top:50%}
+/* stacked: no room to run behind the phone, so the headline stands above it */
+html:not(.cine) .herowords{position:static;height:auto;opacity:1;z-index:2;display:flex;
+  flex-direction:column;align-items:center;text-align:center;gap:0;margin-bottom:22px}
+html:not(.cine) .hwrow{position:static;font-size:clamp(30px,9.6vw,44px);line-height:1.15}
+html:not(.cine) .hl,html:not(.cine) .hr{position:static}
+html:not(.cine) .phone{position:relative;z-index:2}
+html:not(.cine) .phone img.s0{opacity:1}
+html:not(.cine) .panel{min-height:0;padding:76px 7vw 0}
+html:not(.cine) .panel .col{margin:0 auto}
+html:not(.cine) .panel.hero{padding:26px 7vw 0;flex-direction:column;align-items:center;
+  text-align:center;gap:22px}
+html:not(.cine) .panel.hero .tag p{margin-left:auto;margin-right:auto}
+html:not(.cine) .coming{width:100%;max-width:340px;justify-content:space-between}
+html:not(.cine) .mobshot{position:relative;display:block;width:min(238px,64vw);
+  margin:28px auto 0;border-radius:34px;padding:3px;
+  background:linear-gradient(145deg,#5a5a5e,#2b2b2e 30%,#1d1d20 55%,#525256 92%);
+  box-shadow:0 24px 60px rgba(0,0,0,.5)}
+html:not(.cine) .mobshot img{display:block;width:100%;border-radius:31px;
+  border:7px solid #0A0807;box-sizing:border-box}
+html:not(.cine) .mobshot::after{content:"";position:absolute;top:2.2%;left:50%;
+  transform:translateX(-50%);width:28.5%;aspect-ratio:71/20;background:#000;border-radius:999px}
+html:not(.cine) .inlinecard{margin-left:auto;margin-right:auto;width:100%;max-width:340px}
+html:not(.cine) .inlinecard.sharecard2{max-width:340px}
+html:not(.cine) .flat{padding:88px 7vw}
+html:not(.cine) .outro{padding-bottom:0}
+
+@media (max-width:900px){
+  .top nav a.navlink{display:none}
+  .outro .bigword2{white-space:nowrap}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{transition-duration:.01ms !important;animation:none !important}
+}
